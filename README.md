@@ -1,6 +1,6 @@
 # obj2uncrz
 
-_A converter for Wavefront OBJ files to UNCRZ files._
+_Convert from Wavefront OBJ to UNCRZ._
 
 ## Usage
 

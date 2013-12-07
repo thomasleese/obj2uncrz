@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+import argparse
 import collections
 import decimal
 import math
@@ -519,6 +519,9 @@ class Converter(object):
         print(" > Conversion took", str(int(duration * 1000)) + "ms")
 
 if __name__ == "__main__":
-    c = Converter()
-    for f in sys.argv[1:]:
-        c.convert(f)
+    parser = argparse.ArgumentParser(description = "Convert from Wavefront OBJ to UNCRZ.")
+    parser.add_argument("files", nargs = "+", help = "UNCRZ description files for use as input")
+    args = parser.parse_args()
+
+    for filename in args.files:
+        Converter().convert(filename)
