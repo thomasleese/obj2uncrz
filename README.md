@@ -11,4 +11,3 @@ _Convert from Wavefront OBJ to UNCRZ._
 For more information, go [here][0].
 
 [0]: https://github.com/VisualMelon/Marsens
-

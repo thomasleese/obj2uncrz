@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 import argparse
 import collections
-import decimal
 import math
 import os
 import sys
 import time
+
+from decimal import Decimal as Number # change to float if you don't need arbitary precision
 
 class Material(object):
     def __init__(self, name):
@@ -86,7 +87,7 @@ class DescriptionSegment(object):
         self.type = "seg"
         self.segments = [ ]
         self.obj = None
-        self.origin = ( decimal.Decimal(0), decimal.Decimal(0), decimal.Decimal(0) )
+        self.origin = ( Number(0), Number(0), Number(0) )
         self.match = [ ]
         self.prop = None
 
@@ -212,24 +213,24 @@ class Converter(object):
                 elif tokens[0]== "o":
                     obj = mdl.create_object(tokens[1])
                 elif tokens[0] == "v":
-                    vertex = [ decimal.Decimal(1), decimal.Decimal(1), decimal.Decimal(1), decimal.Decimal(1) ]
+                    vertex = [ Number(1), Number(1), Number(1), Number(1) ]
                     
                     try:
-                        vertex = [ decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), decimal.Decimal(tokens[3]), decimal.Decimal(tokens[4]) ]
+                        vertex = [ Number(tokens[1]), Number(tokens[2]), Number(tokens[3]), Number(tokens[4]) ]
                     except IndexError:
-                        vertex = [ decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), decimal.Decimal(tokens[3]), 1.0 ]
+                        vertex = [ Number(tokens[1]), Number(tokens[2]), Number(tokens[3]), 1.0 ]
                     
                     mdl.positions.append(vertex)
                 elif tokens[0] == "vn":
-                    normal = [ decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), decimal.Decimal(tokens[3]) ]
+                    normal = [ Number(tokens[1]), Number(tokens[2]), Number(tokens[3]) ]
                     mdl.normals.append(normal)
                 elif tokens[0] == "vt":
                     texcoords = [ 1.0, 1.0, 1.0 ]
                     
                     try:
-                        texcoords = [ decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), decimal.Decimal(tokens[3]) ]
+                        texcoords = [ Number(tokens[1]), Number(tokens[2]), Number(tokens[3]) ]
                     except:
-                        texcoords = [ decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), 1.0 ]
+                        texcoords = [ Number(tokens[1]), Number(tokens[2]), 1.0 ]
                     
                     mdl.texcoords.append(texcoords)
                 elif tokens[0] == "g":
@@ -276,7 +277,7 @@ class Converter(object):
                     new_segment = DescriptionSegment(tokens[1], segment)
                     if tokens[0] == "blend":
                         new_segment.type = "blend"
-                        new_segment.prop = decimal.Decimal(tokens[2])
+                        new_segment.prop = Number(tokens[2])
                     segment.segments.append(new_segment)
                     segment = new_segment
                 elif tokens[0] == "sec":
@@ -287,7 +288,7 @@ class Converter(object):
                 elif tokens[0] == "obj":
                     segment.obj = desc.model.find_object(tokens[1])
                 elif tokens[0] == "origin":
-                    segment.origin = ( decimal.Decimal(tokens[1]), decimal.Decimal(tokens[2]), decimal.Decimal(tokens[3]) )
+                    segment.origin = ( Number(tokens[1]), Number(tokens[2]), Number(tokens[3]) )
                 elif tokens[0] == "match":
                     segment.match.append(tokens[1])
                 elif tokens[0] == "end" and (tokens[1] == "seg" or tokens[1] == "blend"):
@@ -313,10 +314,10 @@ class Converter(object):
                         new_face = [ ]
                         
                         for face in faces:
-                            position = list(face[0] or [ decimal.Decimal(0), decimal.Decimal(0), decimal.Decimal(0) ])
-                            normal = list(face[1] or [ decimal.Decimal(0), decimal.Decimal(0), decimal.Decimal(0) ])
-                            colour = list(face[2] or [ decimal.Decimal(1), decimal.Decimal(1), decimal.Decimal(1), decimal.Decimal(1) ])
-                            texCoords = list(face[3] or [ decimal.Decimal(0), decimal.Decimal(0) ])
+                            position = list(face[0] or [ Number(0), Number(0), Number(0) ])
+                            normal = list(face[1] or [ Number(0), Number(0), Number(0) ])
+                            colour = list(face[2] or [ Number(1), Number(1), Number(1), Number(1) ])
+                            texCoords = list(face[3] or [ Number(0), Number(0) ])
                             vertex = DescriptionVertex(position, normal, colour, texCoords, segment)
                             
                             if vertex in model.vertices:
@@ -371,11 +372,11 @@ class Converter(object):
                 
                 if do_match:
                     if model.match_normals:
-                        x = decimal.Decimal(str(sum([ v.normal[0] for v in same_vertices ]) / len(same_vertices)))
-                        y = decimal.Decimal(str(sum([ v.normal[1] for v in same_vertices ]) / len(same_vertices)))
-                        z = decimal.Decimal(str(sum([ v.normal[2] for v in same_vertices ]) / len(same_vertices)))
+                        x = Number(str(sum([ v.normal[0] for v in same_vertices ]) / len(same_vertices)))
+                        y = Number(str(sum([ v.normal[1] for v in same_vertices ]) / len(same_vertices)))
+                        z = Number(str(sum([ v.normal[2] for v in same_vertices ]) / len(same_vertices)))
                         
-                        l = decimal.Decimal(str(math.sqrt(x * x + y * y + z * z)))
+                        l = Number(str(math.sqrt(x * x + y * y + z * z)))
                         x /= l
                         y /= l
                         z /= l
