@@ -254,7 +254,7 @@ class Converter(object):
         model = None
         segment = None
         section = None
-        
+
         with TokenFile(filename) as fp:
             for tokens in fp.read():
                 if tokens[0] == "mdl":
@@ -303,16 +303,16 @@ class Converter(object):
                         section.attributes.append(tokens)
                 else:
                     print(tokens)
-        
+
         def process_segment(segment, model, indent = 0):
             print("  " + (" " * indent) + " > Processing", segment.name, end = " ")
-            
+
             start_time = time.time()
             if segment.obj:
                 for group in segment.obj.groups:
                     for faces in group.faces:
                         new_face = [ ]
-                        
+
                         for face in faces:
                             position = list(face[0] or [ Number(0), Number(0), Number(0) ])
                             normal = list(face[1] or [ Number(0), Number(0), Number(0) ])
@@ -328,7 +328,7 @@ class Converter(object):
                             else:
                                 new_face.append(len(model.vertices))
                                 model.vertices.append(vertex)
-                        
+
                         for section in model.sections:
                             if section.material == group.material:
                                 section.faces.append(new_face)
