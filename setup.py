@@ -7,7 +7,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='obj2uncrz',
-    version='1.0.0',
+    version='1.0.1',
     keywords='obj uncrz',
     url='https://github.com/tomleese/obj2uncrz',
     packages=find_packages(exclude=['tests', 'tests.*']),
