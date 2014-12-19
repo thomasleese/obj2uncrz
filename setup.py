@@ -13,6 +13,9 @@ setup(
     entry_points={
         'console_scripts': ['obj2uncrz = obj2uncrz.__main__:main']
     },
+    setup_requires=[
+        'sphinx'
+    ],
     include_package_data=True,
     zip_safe=True,
     classifiers=[
