@@ -1,9 +1,10 @@
 obj2uncrz
 =========
 
+This is the documentation for version |release|, generated |today|.
+
 User Guide
 ----------
-
 
 API Reference
 -------------
