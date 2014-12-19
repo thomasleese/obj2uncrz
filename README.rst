@@ -6,6 +6,7 @@ Convert from Wavefront OBJ to UNCRZ_.
 Usage
 -----
 
-    $ ./main.py <undsc file> ...
+    $ ./setup.py install
+    $ obj2uncrz <undsc file> ...
 
 .. _UNCRZ: https://github.com/VisualMelon/Marsens
