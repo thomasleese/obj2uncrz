@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import argparse
 import collections
 import math
@@ -532,10 +531,14 @@ class Converter:
         print(" > Conversion took", str(int(duration * 1000)) + "ms")
 
 
-if __name__ == "__main__":
+def main():
     parser = argparse.ArgumentParser(description="Convert from Wavefront OBJ to UNCRZ.")
     parser.add_argument("files", nargs="+", help="UNCRZ description files for use as input")
     args = parser.parse_args()
 
     for filename in args.files:
         Converter().convert(filename)
+
+
+if __name__ == "__main__":
+    main()
