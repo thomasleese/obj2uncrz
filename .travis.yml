@@ -1,9 +1,0 @@
-language: python
-python:
-  - '2.7'
-  - 'pypy'
-  - '3.3'
-  - '3.4'
-install:
-  - ./setup.py install
-script: ./setup.py test
